@@ -33,7 +33,7 @@ podTemplate(label: 'mypod',
                 docker login -u=\${DOCKER_USER} -p=\${DOCKER_PASSWORD} \${REGISTRY}
                 set -x
 
-                docker push \${REGISTRY}/\${NAMESPACE}/demoapp
+                docker push \${REGISTRY}/\${NAMESPACE}/demoapp:${env.BUILD_NUMBER}
                 """
             }
         }
@@ -55,7 +55,7 @@ podTemplate(label: 'mypod',
                 fi
 
                 #Deploy
-                kubectl set image deployment/\${DEPLOYMENT} demoapp=\${REGISTRY}/\${NAMESPACE}/demoapp
+                kubectl set image deployment/\${DEPLOYMENT} demoapp=\${REGISTRY}/\${NAMESPACE}/demoapp:${env.BUILD_NUMBER}
                 kubectl rollout status deployment/\${DEPLOYMENT}
                 #Deploy
 
