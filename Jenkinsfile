@@ -18,7 +18,7 @@ podTemplate(label: 'mypod',
                 NAMESPACE=`cat /var/run/configs/registry-config/namespace`
                 REGISTRY=`cat /var/run/configs/registry-config/registry`
 
-                docker build -t \${REGISTRY}/\${NAMESPACE}/demoapp .
+                docker build -t \${REGISTRY}/\${NAMESPACE}/demoapp:${env.BUILD_NUMBER} .
                 """
             }
             stage('Push Docker Image to Registry') {
