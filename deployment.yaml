@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name:  demoapp
+  labels:
+    name:  demoapp
+spec:
+  template:
+    metadata:
+      labels:
+        name:  demoapp
+    spec:
+      containers:
+      - image:  mycluster.icp:8500/default/demoapp
+        name: demoapp
+        ports:
+        - containerPort:  8080

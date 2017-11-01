@@ -45,7 +45,8 @@ podTemplate(label: 'mypod',
                 NAMESPACE=`cat /var/run/configs/registry-config/namespace`
                 REGISTRY=`cat /var/run/configs/registry-config/registry`
                 #Deploy
-                kubectl run --image=\${REGISTRY}/\${NAMESPACE}/demoapp demoapp
+                kubectl create -f deployment.yaml
+                kubectl create -f service.yaml
                 """
             }
         }

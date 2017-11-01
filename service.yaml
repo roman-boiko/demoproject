@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  demoapp-service
+spec:
+  selector:
+    name:  demoapp
+  type:  LoadBalancer
+  ports:
+  - name:  http
+    port:  8080
+    targetPort:  8080
