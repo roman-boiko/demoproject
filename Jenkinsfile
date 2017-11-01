@@ -44,9 +44,21 @@ podTemplate(label: 'mypod',
                 set +e
                 NAMESPACE=`cat /var/run/configs/registry-config/namespace`
                 REGISTRY=`cat /var/run/configs/registry-config/registry`
+                DEPLOYMENT=`kubectl get deployments | grep demoapp | awk '{print \$1}'`
+
+                kubectl get deployments \${DEPLOYMENT}
+
+                if [ \${?} -ne "0" ]; then
+                    kubectl create -f deployment.yaml
+                    kubectl create -f service.yaml
+                    exit 1
+                fi
+
                 #Deploy
-                kubectl create -f deployment.yaml
-                kubectl create -f service.yaml
+                kubectl set image deployment/\${DEPLOYMENT} demoapp=\${REGISTRY}/\${NAMESPACE}/demoapp:${env.BUILD_NUMBER}
+                kubectl rollout status deployment/\${DEPLOYMENT}
+                #Deploy
+
                 """
             }
         }
