@@ -55,7 +55,7 @@ podTemplate(label: 'mypod',
                 fi
 
                 #Deploy
-                kubectl set image deployment/\${DEPLOYMENT} demoapp=\${REGISTRY}/\${NAMESPACE}/demoapp:${env.BUILD_NUMBER}
+                kubectl set image deployment/\${DEPLOYMENT} demoapp=\${REGISTRY}/\${NAMESPACE}/demoapp
                 kubectl rollout status deployment/\${DEPLOYMENT}
                 #Deploy
 
